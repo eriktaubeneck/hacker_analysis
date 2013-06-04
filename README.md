@@ -5,3 +5,7 @@ All *.tex and *.pdf files should be sourced from a corresponding *.md file. Any 
     pandoc -s filename.md -o filename.tex
 
 and then *.pdf can be built using your favorite [LaTeX](http://www.latex-project.org/) utility.
+
+The meetings corresponding to each document is outlined here:
+
+- Completeness: Wed, June 5th 2013
