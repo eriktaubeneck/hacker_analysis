@@ -1,0 +1,112 @@
+Hacker School Analysis Seminar - Useful Sets and The Completeness Axiom
+============
+
+##Attribution
+
+Much of the content is closely adapted from [Elementary Analysis: The Theory of Calculus](http://books.google.com/books/about/Elementary_Analysis.html?id=ZDaSnKr_k5sC) by Kenneth Ross. This book, or others on mathematical analysis, should be consulted for further inquiry.
+
+##Natural Numbers, Integers, and Fractions
+
+As we move forward, we will make use of a few different sets of numbers, most of which you are probably already familiar with.
+
+$$ \mathbb{N} = \{1,2,3,...\} $$
+
+These are all the positive whole numbers, called the Natural Numbers. Sometimes $0$ is included, but to stick with the notation in the Ross text, we will exclude it.
+
+$$ \mathbb{Z} = \{\pm n \forall n \in \mathbb{N} \} \cup \{0\} $$
+
+This reads in plain english as "plus and minus n for all n in $\mathbb{N}$ union the set containing 0". 
+
+$$ \mathbb{Q} = \{\frac{p}{q} \forall p,q \in \mathbb{Z} \mid q \ne 0 \} $$
+
+These are more commonly known as fractions, (and maybe less commonly the rational numbers) and include any number which can be written as the division of any other two numbers of $\mathbb{Z}$.
+
+## Real Numbers
+
+The final set, and the most important for our little seminar, is $\mathbb{R}$. However, defining $\mathbb{R}$ is a bit tedious and beyond our scope. Instead, we will describe it as the completion of $\mathbb{Q}$. That is, it "fill in the gaps" that $\mathbb{Q}$ has, such as $\pi$, $\sqrt{2}$, and $e$.
+
+We will also introduce the Completeness Axiom, which assures us that $\mathbb{R}$ has "no gaps". First, a couple definitions:
+
+###Definition 1.1
+Let $S$ be a nonempty subset of $\mathbb{R}$.
+
+(a). If $S$ contains a largest element $s_0$ (that is, $s_0 \in S$ and $s \le s_0$ for all $s \in S$), then we call $s_0$ the _maximum_ of $S$, i.e. $s_0 = \max S$.
+
+(b). If $S$ contains a smallest element, then we call it the _minimum_ of $S$, i.e. $\min S$.
+
+###Definition 1.2
+Let $S$ be a nonempty subset of $\mathbb{R}$.
+
+(a). If a real number $M$ satisfies $s \le M$ for all $s \in S$, then $M$ is called the _upper bound_ of $S$ and the set $S$ is said to be _bounded above_.
+
+(b). If a real number $m$ satisfies $m \le s$ for all $s in S$, then $m$ is called the _lower bound_ of $S$ and the set $S$ is said to be _bounded below_.
+
+(c). The set $S$ is said to be _bounded_ if it is bounded above and bounded below. Thus $S$ is bounded if there exists real numbers $m$ and $M$ such that $S \subseteq [m,M]$. 
+
+### Notation Note
+$$ [m,M] = \{x \forall x \in \mathbb{R} \mid m \le x \le M \} $$
+$$ (m,M) = \{x \forall x \in \mathbb{R} \mid m < x < M \} $$
+
+###Definition 1.3
+Let $S$ be a nonempty subset of $\mathbb{R}$.
+
+(a). If $S$ is bounded above and $S$ has a least upper bound, then we will call it the _supremum of_ $S$ and denote it by $\sup S$. Formally, $s_0 = \sup(S)$ iff
+  (1). $s_0 \ge s$ for all $s in S$, and
+  (2). for any $t \in \mathbb{R}$ such that $t \ge s$ for all $s \in S$, then $t \ge s_0$.
+
+(b). If $S$ is bounded below and $S$ has a greatest lower bound, then we will call it the _infimum of_ $S$  and denote it by $\inf S$.
+
+###Examples
+
+(a). If a set $S$ has a maximum, then $\max S = \sup S$. Similarly, if it has a minimum, then $\min S = \sup S$.
+
+(b). If $a,b \in \mathbb{R}$ and $a < b$, then $$ \sup [a,b] = \sup(a,b) = \sup[a,b) = \sup(a,b] = b $$
+
+(c). inf $\mathbb{N}$ = 1
+
+(d). If $A = \{r \in \mathbb{Q} \mid 0 \le r \le \sqrt{2} \}$, then $\sup A = \sqrt{2}$ and $\inf A = 0$
+
+
+### Completeness Axiom
+Every nonempty subset $S$ of $\mathbb{R}$ that is bounded above has a least upper bound. In other words, $\sup S$ exists and is a real number.
+
+Since this is an axiom, it is one of the basic assumptions that we are making in order to conduct out analysis. We are also making a number of other assumptions about things like set theory, but we won't go into that detail here. This will be the most important "tool" we will use, and most of what we will learn over the next few weeks would not be true without the completeness axiom.
+
+### Corollary
+Every nonempty set $S$ of $\mathbb{R}$ that is bounded below has a greatest lower bound, i.e. $\inf S$ exists.
+
+###Proof (Our first one!)
+
+Let $S$ be bounded below, and let $-S$ be the set $\{-s : s \in S\}$. Since $S$ is bounded below, by definition there exists an $m$ in $\mathbb{R}$ such that $m \le s$ for all $s \in S$. This implies that $-m \ge -s$ for all $s \in S$, and thus $-m \ge u$ for all $u \in -S$. Thus $-S$ is bounded above by $-m$, and by the Completeness Theorem, $\sup(-S)$ exists.
+
+Let $s_0 = -\sup(-S)$. We claim that $s_0$ is $\inf(S)$, which means that we need to show:
+
+(1). $s_0 \le s$ for all $s \in S$
+
+(2). for any $t$, if $t \le s$ for all $s \in S$, then $t \le s_0$
+
+To prove (1), note that $-s_0 = \sup(-S)$, and by definition, $\sup(-S) \ge u$ for all $u \in -S$. Replacing, we get $-s_0 \ge u$ for all $u \in -S$. Multiplying by $-1$, we get $s_0 \le -u$ for all $u \in -S$, thus $s_0 \le s$ for all $s in S$, as desired.
+
+To prove (2), suppose by way of contradiction that there exists a $t$ such that $t \le s$ for all $s \in S$, but $t > s_0$. Then, $-t \ge -s$ for $s \in S$, which implies $-t \ge u$ for all $u \in -S$. Similarly, $-t < -s_0$. However, this contradicts the fact that $-s_0 = \sup(-S)$. $\mathbb{QED}$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
