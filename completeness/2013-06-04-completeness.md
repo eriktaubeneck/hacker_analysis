@@ -39,7 +39,7 @@ Let $S$ be a nonempty subset of $\mathbb{R}$.
 
 (a). If a real number $M$ satisfies $s \le M$ for all $s \in S$, then $M$ is called the _upper bound_ of $S$ and the set $S$ is said to be _bounded above_.
 
-(b). If a real number $m$ satisfies $m \le s$ for all $s in S$, then $m$ is called the _lower bound_ of $S$ and the set $S$ is said to be _bounded below_.
+(b). If a real number $m$ satisfies $m \le s$ for all $s \in S$, then $m$ is called the _lower bound_ of $S$ and the set $S$ is said to be _bounded below_.
 
 (c). The set $S$ is said to be _bounded_ if it is bounded above and bounded below. Thus $S$ is bounded if there exists real numbers $m$ and $M$ such that $S \subseteq [m,M]$. 
 
@@ -58,7 +58,7 @@ Let $S$ be a nonempty subset of $\mathbb{R}$.
 
 ###Examples
 
-(a). If a set $S$ has a maximum, then $\max S = \sup S$. Similarly, if it has a minimum, then $\min S = \sup S$.
+(a). If a set $S$ has a maximum, then $\max S = \sup S$. Similarly, if it has a minimum, then $\min S = \inf S$.
 
 (b). If $a,b \in \mathbb{R}$ and $a < b$, then $$ \sup [a,b] = \sup(a,b) = \sup[a,b) = \sup(a,b] = b $$
 
@@ -77,7 +77,7 @@ Every nonempty set $S$ of $\mathbb{R}$ that is bounded below has a greatest lowe
 
 ###Proof (Our first one!)
 
-Let $S$ be bounded below, and let $-S$ be the set $\{-s : s \in S\}$. Since $S$ is bounded below, by definition there exists an $m$ in $\mathbb{R}$ such that $m \le s$ for all $s \in S$. This implies that $-m \ge -s$ for all $s \in S$, and thus $-m \ge u$ for all $u \in -S$. Thus $-S$ is bounded above by $-m$, and by the Completeness Theorem, $\sup(-S)$ exists.
+Let $S$ be bounded below, and let $-S$ be the set $\{-s : s \in S\}$. Since $S$ is bounded below, by definition there exists an $m$ in $\mathbb{R}$ such that $m \le s$ for all $s \in S$. This implies that $-m \ge -s$ for all $s \in S$, and thus $-m \ge u$ for all $u \in -S$. Thus $-S$ is bounded above by $-m$, and by the Completeness Axiom, $\sup(-S)$ exists.
 
 Let $s_0 = -\sup(-S)$. We claim that $s_0$ is $\inf(S)$, which means that we need to show:
 
