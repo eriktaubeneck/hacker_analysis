@@ -37,7 +37,7 @@ Since $b-a > 0$, the Archimedean property shows that there exists an $n \in \mat
 
 Formally, a _sequence_ is a function from $\{ n \in \mathbb{Z}: n \ge m\}$, where $m$ is usually 0 or 1, into $\mathbb{R}$. However, it is customary to write $s_n$ rather than $s(n)$, and is also convenient to write $(s_n)_{n=m}^{\infty}$, $(s_m, s_{m+1}, s_{m+2})$, or, when $m = 1$, $(s_n)_{n \in \mathbb{N}}$. 
 
-### Examples
+### Examples (1)
 
 (a). Consider the sequence $(a_n)_{n \in \mathbb{N}}$ where $a_n = \frac{1}{n^2}$. This is the sequence $(1, \frac{1}{4}, \frac{1}{9}, \frac{1}{16}, \frac{1}{25}, ...)$. Formally this is the function with domain $\mathbb{N}$ with value $\frac{1}{n^2}$ for each $n$. The _set_ of values is $\{1, \frac{1}{4}, \frac{1}{9}, \frac{1}{16}, \frac{1}{25}, ...\}$.
 
@@ -51,15 +51,61 @@ $$ (2, 2.25, 2.3704, 2.4414, 2.4883, 2.5216, 2.5465, 2.5658, ...). $$
 
 $c_{100}$ is approximately 2.7048, and $c_{1000}$ is approximately 2.7169.
 
+(d.) Consider the sequence $(d_n)_{n \in \mathbb{N}}$ where $d_n = \pi^{n-1}$. This is the sequence $(\pi^0, \pi^1, \pi^2, \pi^3, ...)$, or approximately
+
+$$ (0, 3.1416, 9.8696, 31.0063, ...). $$
+
+$d_{100}$ is approximately $5.1878 \times 10^{49}$ and $d_{1000}$ causes an OverflowError in Python.
+
 ### Limits
 
 The _limit_ of a sequence $(s_n)$ is a real number which the values $s_n$ are "close" to for large values of $n$. In example (a), the values are "close" to 0 for large $n$, and in example (c), the values are close to Euler's constant, $e$, for large $n$. However, example (b) doesn't seem to get close to any number, but instead jumps between $-1$ and $1$. As we'll see in the following definition, a _limit_ will require the sequence values to be close to the limit value for _all_ large $n$, so neither $1$ or $-1$ will be limits of $(c_n)$.
 
-#### Definition:
+#### Definition (1):
 
-A sequence $(s_n)$ of real numbers is said to _converge_ to the real number $s$ if and only if for every $\epsilon > 0$ there exists a number $N$ such that $n>N$ such that $|s_n - s| < \epsilon$ for all $n > N$.
+A sequence $(s_n)$ of real numbers is said to _converge_ to the real number $s$ if and only if for every $\epsilon > 0$ there exists a number $N$ such that $|s_n - s| < \epsilon$ for all $n > N$.
 
+#### Definition (2):
 
+A sequence $(s_n)$ of real numbers is said to _diverge towards $\infty$_ if and only if for every $M \in \mathbb{R}$ there exists a number $N$ such that $s_n > M$ for all $n > N$.
+
+#### Definition (3):
+
+A sequence $(s_n)$ of real numbers is said to _diverge towards $-\infty$_ if and only if for every $M \in \mathbb{R}$ there exists a number $N$ such that $s_n < M$ for all $n > N$.
+
+### Examples (2)
+
+We will now prove a couple of the above examples (1).
+
+(a.) We aim to prove that $\lim_{n \to \infty} a_n = 0$, so we must show that there exists $N in \mathbb{N}$ such that for all $n >N$, $|a_n - 0| < \epsilon$ for all $\epsilon > 0$.
+
+Let $\epsilon > 0$ be given. Now, define $N = \left \lceil \frac{1}{\sqrt{\epsilon}} \right \rceil $. Then for all $n > N$, 
+
+$$|a_n - 0| = a_n = \frac{1}{n^2} < \frac{1}{N^2} = \frac{1}{\left \lceil \frac{1}{\sqrt{\epsilon}} \right \rceil^2} \le \frac{1}{\left (\frac{1}{\sqrt{\epsilon}} \right )^2} = \frac{1}{\left (\frac{1^2}{\sqrt{\epsilon}^2} \right )} = \left( \sqrt{\epsilon} \right)^2 = \epsilon.$$
+
+$\mathbb{QED}$.
+
+The relevant function (in python) would be:
+
+    from math import sqrt, ceil
+    def example_a(epsilon):
+        N = int(ceil(sqrt(epsilon)))
+        return N
+
+(d.) We aim to prove that $\lim_{n \to \infty} d_n$ diverges towards $\infty$, so we must show that for all $M \in \mathbb{R}$ their exists $N \in \mathbb{N}$ such that $d_n > M$ for all $n > N$.
+
+Let $M \in \mathbb{R}$ be given, and note that if $M \le 0$ and we show that $d_n > 0$ for all $n \in \mathbb{N}$, then $d_n > M$ as well. So assume $M > 0$, and define $N = \lceil \log_{\pi} M \rceil $. Then for all $n > N$,
+
+$$ d_n = \pi^n > \pi^N = \pi^{\lceil \log_{\pi} M \rceil} \ge \pi^{ \log_{\pi} M } = M. $$
+
+$\mathbb{QED}$.
+
+The relevant function (in python) would be:
+
+    from math import pi, log, ceil
+    def example_d(M):
+        N = int(ceil(log(M,pi)))
+        return N
 
 
 

@@ -110,7 +110,7 @@ $\mathbb{R}$. However, it is customary to write $s_n$ rather than
 $s(n)$, and is also convenient to write $(s_n)_{n=m}^{\infty}$,
 $(s_m, s_{m+1}, s_{m+2})$, or, when $m = 1$, $(s_n)_{n \in \mathbb{N}}$.
 
-\subsubsection{Examples}
+\subsubsection{Examples (1)}
 
 (a). Consider the sequence $(a_n)_{n \in \mathbb{N}}$ where
 $a_n = \frac{1}{n^2}$. This is the sequence
@@ -137,6 +137,15 @@ approximately
 $c_{100}$ is approximately 2.7048, and $c_{1000}$ is approximately
 2.7169.
 
+(d.) Consider the sequence $(d_n)_{n \in \mathbb{N}}$ where
+$d_n = \pi^{n-1}$. This is the sequence
+$(\pi^0, \pi^1, \pi^2, \pi^3, ...)$, or approximately
+
+\[ (0, 3.1416, 9.8696, 31.0063, ...). \]
+
+$d_{100}$ is approximately $5.1878 \times 10^{49}$ and $d_{1000}$ causes
+an OverflowError in Python.
+
 \subsubsection{Limits}
 
 The \emph{limit} of a sequence $(s_n)$ is a real number which the values
@@ -148,11 +157,69 @@ and $1$. As we'll see in the following definition, a \emph{limit} will
 require the sequence values to be close to the limit value for
 \emph{all} large $n$, so neither $1$ or $-1$ will be limits of $(c_n)$.
 
-\paragraph{Definition:}
+\paragraph{Definition (1):}
 
 A sequence $(s_n)$ of real numbers is said to \emph{converge} to the
 real number $s$ if and only if for every $\epsilon > 0$ there exists a
-number $N$ such that $n>N$ such that $\vert s_n - s\vert  < \epsilon$
-for all $n > N$.
+number $N$ such that $\vert s_n - s\vert  < \epsilon$ for all $n > N$.
+
+\paragraph{Definition (2):}
+
+A sequence $(s_n)$ of real numbers is said to \emph{diverge towards
+$\infty$} if and only if for every $M \in \mathbb{R}$ there exists a
+number $N$ such that $s_n > M$ for all $n > N$.
+
+\paragraph{Definition (3):}
+
+A sequence $(s_n)$ of real numbers is said to \emph{diverge towards
+$-\infty$} if and only if for every $M \in \mathbb{R}$ there exists a
+number $N$ such that $s_n < M$ for all $n > N$.
+
+\subsubsection{Examples (2)}
+
+We will now prove a couple of the above examples (1).
+
+(a.) We aim to prove that $\lim_{n \to \infty} a_n = 0$, so we must show
+that there exists $N in \mathbb{N}$ such that for all $n >N$,
+$\vert a_n - 0\vert  < \epsilon$ for all $\epsilon > 0$.
+
+Let $\epsilon > 0$ be given. Now, define
+$N = \left \lceil \frac{1}{\sqrt{\epsilon}} \right \rceil $. Then for
+all $n > N$,
+
+\[\vert a_n - 0\vert  = a_n = \frac{1}{n^2} < \frac{1}{N^2} = \frac{1}{\left \lceil \frac{1}{\sqrt{\epsilon}} \right \rceil^2} \le \frac{1}{\left (\frac{1}{\sqrt{\epsilon}} \right )^2} = \frac{1}{\left (\frac{1^2}{\sqrt{\epsilon}^2} \right )} = \left( \sqrt{\epsilon} \right)^2 = \epsilon.\]
+
+$\mathbb{QED}$.
+
+The relevant function (in python) would be:
+
+\begin{verbatim}
+from math import sqrt, ceil
+def example_a(epsilon):
+    N = int(ceil(sqrt(epsilon)))
+    return N
+\end{verbatim}
+
+(d.) We aim to prove that $\lim_{n \to \infty} d_n$ diverges towards
+$\infty$, so we must show that for all $M \in \mathbb{R}$ their exists
+$N \in \mathbb{N}$ such that $d_n > M$ for all $n > N$.
+
+Let $M \in \mathbb{R}$ be given, and note that if $M \le 0$ and we show
+that $d_n > 0$ for all $n \in \mathbb{N}$, then $d_n > M$ as well. So
+assume $M > 0$, and define $N = \lceil \log_{\pi} M \rceil $. Then for
+all $n > N$,
+
+\[ d_n = \pi^n > \pi^N = \pi^{\lceil \log_{\pi} M \rceil} \ge \pi^{ \log_{\pi} M } = M. \]
+
+$\mathbb{QED}$.
+
+The relevant function (in python) would be:
+
+\begin{verbatim}
+from math import pi, log, ceil
+def example_d(M):
+    N = int(ceil(log(M,pi)))
+    return N
+\end{verbatim}
 
 \end{document}
