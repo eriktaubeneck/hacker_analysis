@@ -6,6 +6,14 @@ Much of the content is closely adapted from [Elementary Analysis: The Theory of 
 
 ## Useful Properties
 
+### Triangle Inequality
+
+###Claim:
+_$|a + b| \le |a| + |b|$ for all $a,b \in \mathbb{R}$._
+
+####Proof:
+See Ross text.
+
 ### Archimedean Property
 
 #### Claim: 
@@ -94,9 +102,9 @@ The relevant function (in python) would be:
 
 (d.) We aim to prove that $\lim_{n \to \infty} d_n$ diverges towards $\infty$, so we must show that for all $M \in \mathbb{R}$ their exists $N \in \mathbb{N}$ such that $d_n > M$ for all $n > N$.
 
-Let $M \in \mathbb{R}$ be given, and note that if $M \le 0$ and we show that $d_n > 0$ for all $n \in \mathbb{N}$, then $d_n > M$ as well. So assume $M > 0$, and define $N = \lceil \log_{\pi} M \rceil $. Then for all $n > N$,
+Let $M \in \mathbb{R}$ be given, and note that if $M \le 1$ and we show that $d_n > 1$ for all $n \in \mathbb{N}$, then $d_n > M$ as well. So let $\hat{M} = \max(M,1)$, and define $N = \lceil \log_{\pi} \hat{M} \rceil $. Then for all $n > N$,
 
-$$ d_n = \pi^n > \pi^N = \pi^{\lceil \log_{\pi} M \rceil} \ge \pi^{ \log_{\pi} M } = M. $$
+$$ d_n = \pi^n > \pi^N = \pi^{\lceil \log_{\pi} \hat{M} \rceil} \ge \pi^{ \log_{\pi} \hat{M} } = \hat{M} =  \max(M,1) \ge M. $$
 
 $\mathbb{QED}$.
 
@@ -104,12 +112,42 @@ The relevant function (in python) would be:
 
     from math import pi, log, ceil
     def example_d(M):
+        M = max(1,M)
         N = int(ceil(log(M,pi)))
         return N
 
 
+### Exercises
 
+(1) Write out the first five terms of the following sequences.
 
+  (a). $a_n  = \frac{n}{n+1}$
+  
+  (b). $b_n = 2^{-n}$
+  
+  (c). $c_n = n!$
+  
+  (d). $d_n = 1 + \frac{2}{n}$
+  
+  (e). $e_n = \frac{6n^2+7}{4n^2 - 9}$
+  
+  (f). $f_n = (-1)^n n$
+  
+  (g). $g_n = \frac{n^3+4}{7n^2 - 13}$
+  
+  (h). $h_n = \sin(n \pi)$
+  
+  (i). $i_n = \frac{1}{n} \cos(n)$
+  
+  (j). $j_n = \cos(n)$
+
+(2) For each sequence above, determine whether it converges, diverges to $\pm \infty$, or doesn't converge/diverge, and if so give it's limit. Proofs are not required.
+
+(3) For each sequence above that converges (or diverges to $\pm \infty$), find the mathematical function for $N$ given $M$ or $\epsilon$.
+
+(4) For each sequence above that converges (or diverges to $\pm \infty$), write a function in a programming language of your choice for $N$ given $M$ or $\epsilon$.
+
+(4) For each sequence above that converges (or diverges to $\pm \infty$), prove that it converges to the limit (or diverges to $\pm \infty$).
 
 
 
